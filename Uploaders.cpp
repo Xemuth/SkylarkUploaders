@@ -35,7 +35,9 @@ void Uploaders::Init(int _port){
 	}
 	/* By using this assertion we ensure every path given in our class are valide */
 	if(!DirectoryExists(PathToUploadFolder)){
+		PathToUploadFolder = GetExeFolder() + "/uploaded";
 		DirectoryCreate(PathToUploadFolder);
+		
 	}
 	PrepareOrLoadBDD(); //Load BDD
 	/* We ensure Database have correctly been load */
