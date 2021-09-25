@@ -6,7 +6,7 @@
 #define NOAPPSQL
 #include <plugin/sqlite3/Sqlite3.h>
 namespace Upp{
-	#define MODEL <Uploader/ressources/db/AllowedUser.sch>
+	#define MODEL <SkylarkUploaders/ressources/db/AllowedUser.sch>
 	#define SCHEMADIALECT  <plugin/sqlite3/Sqlite3Schema.h>
 	#include "Sql/sch_header.h"
 }
