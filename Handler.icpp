@@ -237,7 +237,8 @@ SKYLARK(DownloadURL,"/url/**"){
 				if(fu.file){
 					if(FileExists(fu.file->FilePath)){
 						fu.DownloadNumber++;
-						http.SetHeader("content-disposition", "attachment; filename=\"" + fu.file->FileName +"\"").ContentType("application/octet-stream") <<  LoadFile(fu.file->FilePath);
+						Upp::String fileData =  LoadFile(fu.file->FilePath);
+						http.SetHeader("content-disposition", "attachment; filename=\"" + fu.file->FileName +"\"").ContentType("application/octet-stream") << fileData;
 						if(fu.TotalDownloadNumber != -2 && fu.TotalDownloadNumber <= fu.DownloadNumber)
 							GetApp().RemoveURL(fu.Id);
 						return;
