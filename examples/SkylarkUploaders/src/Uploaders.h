@@ -6,7 +6,7 @@
 #define NOAPPSQL
 #include <plugin/sqlite3/Sqlite3.h>
 namespace Upp{
-	#define MODEL <SkylarkUploaders/ressources/db/AllowedUser.sch>
+	#define MODEL <SkylarkUploaders/examples/SkylarkUploaders/ressources/db/AllowedUser.sch>
 	#define SCHEMADIALECT  <plugin/sqlite3/Sqlite3Schema.h>
 	#include "Sql/sch_header.h"
 }
@@ -109,6 +109,7 @@ namespace Upp{
 			Upp::Vector<FileURL> AllURL;
 			Upp::Vector<Uploading> Uploadings; //carrying all current uploading
 			
+			int MAX_PACKET_SIZE = 20000;
 			int TIMEOUT_UPLOAD_S = 10;
 #if defined(PLATFORM_WIN32)
 			Upp::String PathToUploadFolder = "C:\\Upp\\Uploaded";

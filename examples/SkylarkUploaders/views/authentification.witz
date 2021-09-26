@@ -23,6 +23,8 @@ $ALERT
 	<form action=$Auth2 onSubmit="return prepareData()" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 		<div class="row">
 			$post_identity()
+			$post_identity()
+			$post_identity()
 			<div class="col-md-1 col-md-offset-3">
 				<div class="RightText">Login:</div>
 			</div>
