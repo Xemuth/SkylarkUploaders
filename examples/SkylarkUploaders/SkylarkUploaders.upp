@@ -5,10 +5,10 @@ uses
 	plugin/sqlite3;
 
 file
-	src\Handler.icpp,
 	src\Main.cpp,
-	src\Uploaders.cpp,
 	src\Uploaders.h,
+	src\Uploaders.cpp,
+	src\Handler.icpp,
 	views readonly separator,
 	views\base.witz,
 	views\footer.witz,

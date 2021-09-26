@@ -26,7 +26,7 @@ void Uploaders::Init(int _port){
 	root = ""; //Root of our app
 	port = _port; //Port of our app
 	path = GetFileDirectory(__FILE__); //Working directory
-	if(!DirectoryExists(path +"/ressources")){
+	if(!DirectoryExists(path +"../ressources")){
 		path = GetExeFolder();
 		if(!DirectoryExists(path +"/ressources")){
 			Cout() << "ressources directory is absent. Ensure the ressource directory provided with the source code is present near the application executable" << EOL;
@@ -213,7 +213,7 @@ void Uploaders::PrepareOrLoadBDD(){
 	if(!bddLoaded){
 		dbuser.LogErrors(true);
 		bool mustCreate = false;
-		Upp::String path =  this->path + "/ressources/db/allowedUser.db";
+		Upp::String path =  this->path + "../ressources/db/allowedUser.db";
 		if(!FileExists(path))mustCreate =true;
 		if(!dbuser.Open(path)){
 			SKYLARKLOG("Can't create or open database file");
