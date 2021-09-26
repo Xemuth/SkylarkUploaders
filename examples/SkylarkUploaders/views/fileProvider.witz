@@ -8,6 +8,8 @@
 <div style="text-align: center"><h2>Welcome <B>$.USERNAME</B></h2></div>
 <input value="$.USERNAME" id="login" hidden>
 $js_identity()
+$js_identity()
+$js_identity()
 <div class="row">
 	<div class="col-md-10"> 
 $if(.RIGHT > 0)
