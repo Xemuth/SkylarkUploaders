@@ -24,14 +24,14 @@ SKYLARK(CatchAll, "**")
 		path << http[i] << "/";
 		i++;
 	}
-	http("FILEREQUIRED",path )("ERROR_CODE",404)("ERROR_STRING", "File not found.").RenderResult("views/notFound").Response(404,"File not found");
+	http("FILEREQUIRED",path )("ERROR_CODE",404)("ERROR_STRING", "File not found.").RenderResult("../views/notFound").Response(404,"File not found");
 }
 SKYLARK(HomePage,"")
 {
 	if( !http[MARK_SESSION_VAR("USERNAME")].ToString().IsEmpty()){
 		http.Redirect(PrivateScreen);
 	}else{
-		http.RenderResult("views/authentification");
+		http.RenderResult("../views/authentification");
 	}
 }
 SKYLARK(Auth,"/secret")
@@ -39,7 +39,7 @@ SKYLARK(Auth,"/secret")
 	if( !http[MARK_SESSION_VAR("USERNAME")].ToString().IsEmpty()){
 		http.Redirect(PrivateScreen);
 	}else{
-		http.RenderResult("views/authentification");
+		http.RenderResult("../views/authentification");
 	}
 }
 SKYLARK(Auth2,"/auth:POST")
@@ -136,7 +136,7 @@ SKYLARK(PrivateScreen,"/fileProvider"){
 			vm2.Add("AllURL",vm3);
 			vm.Add(f.FileName,vm2);
 		}
-		http("FILES",vm).RenderResult("views/fileProvider");
+		http("FILES",vm).RenderResult("../views/fileProvider");
 	}else{
 		http.ClearSession();
 		http.Redirect(Auth);
@@ -155,22 +155,22 @@ SKYLARK(Delete,"/delete/**"){
 							GetApp().RemoveDocument(f->id);
 							http.Redirect(PrivateScreen);
 						}else{
-							http("FILEREQUIRED","delete/" + AsString(id) )("ERROR_CODE",401)("ERROR_STRING", "You are not allowed to do this.").RenderResult("views/notFound").Response(401,"not allowed.");
+							http("FILEREQUIRED","delete/" + AsString(id) )("ERROR_CODE",401)("ERROR_STRING", "You are not allowed to do this.").RenderResult("../views/notFound").Response(401,"not allowed.");
 						}
 					}else{
-						http("FILEREQUIRED","delete/" + AsString(id) )("ERROR_CODE",204)("ERROR_STRING", "File no longer exist on server.").RenderResult("views/notFound").Response(204,"File no longer exist");
+						http("FILEREQUIRED","delete/" + AsString(id) )("ERROR_CODE",204)("ERROR_STRING", "File no longer exist on server.").RenderResult("../views/notFound").Response(204,"File no longer exist");
 					}
 				}else{
-					http("FILEREQUIRED","delete/" + AsString(id) )("ERROR_CODE",404)("ERROR_STRING", "File not found.").RenderResult("views/notFound").Response(404,"File not found");
+					http("FILEREQUIRED","delete/" + AsString(id) )("ERROR_CODE",404)("ERROR_STRING", "File not found.").RenderResult("../views/notFound").Response(404,"File not found");
 				}
 			}else{
-				http("FILEREQUIRED","delete/?" )("ERROR_CODE",400)("ERROR_STRING", "Bad request. Unknow args.").RenderResult("views/notFound").Response(400,"Bad request. Unknow args");
+				http("FILEREQUIRED","delete/?" )("ERROR_CODE",400)("ERROR_STRING", "Bad request. Unknow args.").RenderResult("../views/notFound").Response(400,"Bad request. Unknow args");
 			}
 		}else{
-			http("FILEREQUIRED","delete" )("ERROR_CODE",400)("ERROR_STRING", "Bad request, no argument passed.").RenderResult("views/notFound").Response(400,"Bad request, no argument passed");
+			http("FILEREQUIRED","delete" )("ERROR_CODE",400)("ERROR_STRING", "Bad request, no argument passed.").RenderResult("../views/notFound").Response(400,"Bad request, no argument passed");
 		}
 	}else{
-		http("FILEREQUIRED","delete/?" )("ERROR_CODE",403)("ERROR_STRING", "Authentication required.").RenderResult("views/notFound").Response(403,"Authentication required");
+		http("FILEREQUIRED","delete/?" )("ERROR_CODE",403)("ERROR_STRING", "Authentication required.").RenderResult("../views/notFound").Response(403,"Authentication required");
 	}
 }
 
@@ -185,19 +185,19 @@ SKYLARK(DeleteURL,"/deleteURL/**"){
 						GetApp().RemoveURL(f->Id);
 						http.Redirect(PrivateScreen);
 					}else{
-						http("FILEREQUIRED","deleteURL/" + AsString(id) )("ERROR_CODE",401)("ERROR_STRING", "You are not allowed to do this.").RenderResult("views/notFound").Response(401,"not allowed.");
+						http("FILEREQUIRED","deleteURL/" + AsString(id) )("ERROR_CODE",401)("ERROR_STRING", "You are not allowed to do this.").RenderResult("../views/notFound").Response(401,"not allowed.");
 					}
 				}else{
-					http("FILEREQUIRED","deleteURL/" + AsString(id) )("ERROR_CODE",404)("ERROR_STRING", "File not found.").RenderResult("views/notFound").Response(404,"File not found");
+					http("FILEREQUIRED","deleteURL/" + AsString(id) )("ERROR_CODE",404)("ERROR_STRING", "File not found.").RenderResult("../views/notFound").Response(404,"File not found");
 				}
 			}else{
-				http("FILEREQUIRED","deleteURL/?" )("ERROR_CODE",400)("ERROR_STRING", "Bad request. Unknow args.").RenderResult("views/notFound").Response(400,"Bad request. Unknow args");
+				http("FILEREQUIRED","deleteURL/?" )("ERROR_CODE",400)("ERROR_STRING", "Bad request. Unknow args.").RenderResult("../views/notFound").Response(400,"Bad request. Unknow args");
 			}
 		}else{
-			http("FILEREQUIRED","deleteURL" )("ERROR_CODE",400)("ERROR_STRING", "Bad request, no argument passed.").RenderResult("views/notFound").Response(400,"Bad request, no argument passed");
+			http("FILEREQUIRED","deleteURL" )("ERROR_CODE",400)("ERROR_STRING", "Bad request, no argument passed.").RenderResult("../views/notFound").Response(400,"Bad request, no argument passed");
 		}
 	}else{
-		http("FILEREQUIRED","deleteURL/?" )("ERROR_CODE",403)("ERROR_STRING", "Authentication required.").RenderResult("views/notFound").Response(403,"Authentication required");
+		http("FILEREQUIRED","deleteURL/?" )("ERROR_CODE",403)("ERROR_STRING", "Authentication required.").RenderResult("../views/notFound").Response(403,"Authentication required");
 	}
 }
 
@@ -211,19 +211,19 @@ SKYLARK(Download,"/download/**"){
 					if(FileExists(f->FilePath)){
 						http.SetHeader("content-disposition", "attachment; filename=\"" + f->FileName +"\"").ContentType("application/octet-stream").SendFile(f->FilePath);
 					}else{
-						http("FILEREQUIRED","download/" + AsString(id) )("ERROR_CODE",204)("ERROR_STRING", "File no longer exist on server.").RenderResult("views/notFound").Response(204,"File no longer exist");
+						http("FILEREQUIRED","download/" + AsString(id) )("ERROR_CODE",204)("ERROR_STRING", "File no longer exist on server.").RenderResult("../views/notFound").Response(204,"File no longer exist");
 					}
 				}else{
-					http("FILEREQUIRED","download/" + AsString(id) )("ERROR_CODE",404)("ERROR_STRING", "File not found.").RenderResult("views/notFound").Response(404,"File not found");
+					http("FILEREQUIRED","download/" + AsString(id) )("ERROR_CODE",404)("ERROR_STRING", "File not found.").RenderResult("../views/notFound").Response(404,"File not found");
 				}
 			}else{
-				http("FILEREQUIRED","download/?" )("ERROR_CODE",400)("ERROR_STRING", "Bad request. Unknow args.").RenderResult("views/notFound").Response(400,"Bad request. Unknow args");
+				http("FILEREQUIRED","download/?" )("ERROR_CODE",400)("ERROR_STRING", "Bad request. Unknow args.").RenderResult("../views/notFound").Response(400,"Bad request. Unknow args");
 			}
 		}else{
-			http("FILEREQUIRED","download" )("ERROR_CODE",400)("ERROR_STRING", "Bad request, no argument passed.").RenderResult("views/notFound").Response(400,"Bad request, no argument passed");
+			http("FILEREQUIRED","download" )("ERROR_CODE",400)("ERROR_STRING", "Bad request, no argument passed.").RenderResult("../views/notFound").Response(400,"Bad request, no argument passed");
 		}
 	}else{
-		http("FILEREQUIRED","download/?" )("ERROR_CODE",403)("ERROR_STRING", "Authentication required.").RenderResult("views/notFound").Response(403,"Authentication required");
+		http("FILEREQUIRED","download/?" )("ERROR_CODE",403)("ERROR_STRING", "Authentication required.").RenderResult("../views/notFound").Response(403,"Authentication required");
 	}
 }
 
@@ -241,21 +241,21 @@ SKYLARK(DownloadURL,"/url/**"){
 							GetApp().RemoveURL(fu.Id);
 						return;
 					}else{
-						http("FILEREQUIRED","url/")("ERROR_CODE",204)("ERROR_STRING", "File no longer exist on server.").RenderResult("views/notFound").Response(204,"File no longer exist");
+						http("FILEREQUIRED","url/")("ERROR_CODE",204)("ERROR_STRING", "File no longer exist on server.").RenderResult("../views/notFound").Response(204,"File no longer exist");
 					}
 				}else{
-					http("FILEREQUIRED","url/")("ERROR_CODE",204)("ERROR_STRING", "File no longer exist on server.").RenderResult("views/notFound").Response(204,"File no longer exist");
+					http("FILEREQUIRED","url/")("ERROR_CODE",204)("ERROR_STRING", "File no longer exist on server.").RenderResult("../views/notFound").Response(204,"File no longer exist");
 				}
 				break;
 			}
 		}
 		if(!find){
-			http("FILEREQUIRED","url/")("ERROR_CODE",404)("ERROR_STRING", "Bad URL requested.").RenderResult("views/notFound").Response(404,"Bad URL requested");
+			http("FILEREQUIRED","url/")("ERROR_CODE",404)("ERROR_STRING", "Bad URL requested.").RenderResult("../views/notFound").Response(404,"Bad URL requested");
 		}else{
-			http("FILEREQUIRED","url/")("ERROR_CODE",400)("ERROR_STRING", "Something went wrong.").RenderResult("views/notFound").Response(400,"Something went wrong");
+			http("FILEREQUIRED","url/")("ERROR_CODE",400)("ERROR_STRING", "Something went wrong.").RenderResult("../views/notFound").Response(400,"Something went wrong");
 		}
 	}else{
-		http("FILEREQUIRED","url" )("ERROR_CODE",400)("ERROR_STRING", "Bad request, no argument passed.").RenderResult("views/notFound").Response(400,"Bad request, no argument passed");
+		http("FILEREQUIRED","url" )("ERROR_CODE",400)("ERROR_STRING", "Bad request, no argument passed.").RenderResult("../views/notFound").Response(400,"Bad request, no argument passed");
 	}
 }
 
@@ -270,16 +270,16 @@ SKYLARK(CreateURL,"/generateURL"){
 					http.Redirect(PrivateScreen);
 				}
 				else{
-					http("FILEREQUIRED","generatURL/?")("ERROR_CODE",204)("ERROR_STRING", "Error during creation of URL.").RenderResult("views/notFound").Response(204,"Error during creation of URL");
+					http("FILEREQUIRED","generatURL/?")("ERROR_CODE",204)("ERROR_STRING", "Error during creation of URL.").RenderResult("../views/notFound").Response(204,"Error during creation of URL");
 				}
 			}else{
-				http("FILEREQUIRED","generatURL/?" )("ERROR_CODE",400)("ERROR_STRING", "Bad request. Unknow args.").RenderResult("views/notFound").Response(400,"Bad request. Unknow args");
+				http("FILEREQUIRED","generatURL/?" )("ERROR_CODE",400)("ERROR_STRING", "Bad request. Unknow args.").RenderResult("../views/notFound").Response(400,"Bad request. Unknow args");
 			}
 		}else{
-			http("FILEREQUIRED","generatURL/?" )("ERROR_CODE",400)("ERROR_STRING", "Bad request, no argument passed.").RenderResult("views/notFound").Response(400,"Bad request, no argument passed");
+			http("FILEREQUIRED","generatURL/?" )("ERROR_CODE",400)("ERROR_STRING", "Bad request, no argument passed.").RenderResult("../views/notFound").Response(400,"Bad request, no argument passed");
 		}
 	}else{
-		http("FILEREQUIRED","generatURL" )("ERROR_CODE",403)("ERROR_STRING", "Authentication required.").RenderResult("views/notFound").Response(403,"Authentication required");
+		http("FILEREQUIRED","generatURL" )("ERROR_CODE",403)("ERROR_STRING", "Authentication required.").RenderResult("../views/notFound").Response(403,"Authentication required");
 	}
 }
 
@@ -355,23 +355,23 @@ SKYLARK(PostUpload,"upload:POST"){
 SKYLARK(RessourcesHandler, "/ressources/*"){
 	if(http[0].Find(".png") != -1){
 		http.SetHeader("Cache-Control","public");
-		http.ContentType("image/png") <<  LoadFile(GetFilePath("ressources/img/" +http[0]));
+		http.ContentType("image/png") <<  LoadFile(GetFilePath("../ressources//img/" +http[0]));
 	}else if(http[0].Find(".css")!= -1){
 		http.SetHeader("Cache-Control","public");
-		http.ContentType("text/css") <<  LoadFile(GetFilePath("ressources/css/" +http[0]));
+		http.ContentType("text/css") <<  LoadFile(GetFilePath("../ressources//css/" +http[0]));
 	}else if(http[0].Find("fonts")!= -1){
 		http.SetHeader("Cache-Control","public");
-		http.ContentType("text/css") <<  LoadFile(GetFilePath("ressources/fonts/" +http[0]));
+		http.ContentType("text/css") <<  LoadFile(GetFilePath("../ressources//fonts/" +http[0]));
 	}else if(http[0].Find(".js")!= -1){
 		http.SetHeader("Cache-Control","public");
-		http.ContentType("text/javascript") <<  LoadFile(GetFilePath("ressources/js/" +http[0]));
+		http.ContentType("text/javascript") <<  LoadFile(GetFilePath("../ressources//js/" +http[0]));
 	}else{
 		http.Response(404,"File not found");
 	}
 }
 SKYLARK(Favicon, "/favicon.ico")
 {
-	http.ContentType("image/png") << LoadFile(GetFilePath("ressources/img/favAlpha.png"));
+	http.ContentType("image/png") << LoadFile(GetFilePath("../ressources//img/favAlpha.png"));
 }
 
 
