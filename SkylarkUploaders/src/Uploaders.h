@@ -6,7 +6,7 @@
 #define NOAPPSQL
 #include <plugin/sqlite3/Sqlite3.h>
 namespace Upp{
-	#define MODEL <SkylarkUploaders/examples/SkylarkUploaders/ressources/db/AllowedUser.sch>
+	#define MODEL <SkylarkUploaders/SkylarkUploaders/ressources/db/AllowedUser.sch>
 	#define SCHEMADIALECT  <plugin/sqlite3/Sqlite3Schema.h>
 	#include "Sql/sch_header.h"
 }
@@ -114,7 +114,7 @@ namespace Upp{
 #if defined(PLATFORM_WIN32)
 			Upp::String PathToUploadFolder = "C:\\Upp\\Uploaded";
 #elif defined(PLATFORM_POSIX)
-			Upp::String PathToUploadFolder = "/home/xemuth/Uploaded";
+			Upp::String PathToUploadFolder = "~/Uploaded";
 #else
 #error Uploaders can only be compiled by using POSIX Path or Windows Path, Ensure compilation flag : PLATFORM_POSIX or PLATFORM_WIN32 is set
 #endif
