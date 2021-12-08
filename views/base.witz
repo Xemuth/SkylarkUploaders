@@ -15,7 +15,7 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-2">#DATALIST</div>
-				<div class="col-md-10"><a href="/"><img id="logo" class="centerElem" src="/ressources/UOGL.png" alt="Logo drawed by Hugo Hamon"></a></div>
+				<div class="col-md-10"><a href="/"><img id="logo" class="centerElem" src="/ressources/UOGL.png" alt="Logo drawn by Hugo Hamon"></a></div>
 				<div class="col-md-2">#DATALIST2</div>
 			</div>
 			<br>
